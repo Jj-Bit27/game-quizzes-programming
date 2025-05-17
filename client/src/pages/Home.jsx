@@ -13,7 +13,7 @@ export default function Home() {
 
   const obtenerRanking = async () => {
     const res = await getRankingRequest();
-    setPlayers(res.data);
+    setPlayers(res.data.result);
   };
 
   const obtenerQuizzes = async () => {
@@ -90,25 +90,25 @@ export default function Home() {
                   </tr>
                 </thead>
                 <tbody>
-                  {players ? (
+                  {!players ? (
                     <tr>
                       <td colSpan="4" className="py-6 text-center">
                         Sin Jugadores Actualmente
                       </td>
                     </tr>
                   ) : (
-                    players?.map((player) => (
+                    players.map((player, index) => (
                       <tr
-                        key={player.rank}
+                        key={player.id}
                         className="border-t border-slate-800 hover:bg-slate-800/30 transition-colors"
                       >
                         <td className="py-3 px-4">
-                          {player.rank <= 3 ? (
+                          {index + 1 <= 3 ? (
                             <span className="text-yellow-400 font-bold">
-                              {player.rank}
+                              {index + 1}
                             </span>
                           ) : (
-                            player.rank
+                            index + 1
                           )}
                         </td>
                         <td className="py-3 px-4 flex items-center">

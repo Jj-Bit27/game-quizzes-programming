@@ -6,14 +6,14 @@ import {
   registerPartida,
   getPartidasUsuario,
   getPartidasQuiz,
-  getRanking
+  getTops
 } from '../controllers/partida.controller.js';
 
 const router = express.Router();
 
 router.post('/register', registerPartida);
-router.get('/:usuario_id', getPartidasUsuario);
-router.get('/:quiz_id', getPartidasQuiz);
-router.get('/ranking', getRanking);
+router.get('/usuario/:usuario_id', getPartidasUsuario);
+router.get('/quiz/:quiz_id', getPartidasQuiz);
+router.get('/top-global', getTops);
 
 export default router;

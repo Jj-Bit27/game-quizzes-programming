@@ -60,7 +60,7 @@ export const addPregunta = async (req, res) => {
     }
 
     // Devolvemos todos los IDs generados
-    res.status(201).json({
+    res.status(200).json({
       preguntas: resultados,
       message: "Preguntas añadidas correctamente"
     });

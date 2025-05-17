@@ -54,26 +54,15 @@ export const getPartidasQuiz = async (req, res) => {
 };
 
 /* Obtener el ranking total */
-export const getRanking = async (req, res) => {
+export const getTops = async (req, res) => {
   try {
     const [result] = await pool.query(
-      `
-      SELECT 
-        u.id, 
-        u.nombre, 
-        SUM(p.puntaje) AS total_puntos, 
-        COUNT(p.id) AS total_partidas
-      FROM partidas p
-      JOIN usuarios u ON p.usuario_id = u.id
-      GROUP BY u.id, u.nombre
-      ORDER BY total_puntos DESC
-      LIMIT 10
-      `
+      "SELECT u.id, u.nombre, SUM(p.puntaje) AS total_puntos, COUNT(p.id) AS total_partidas FROM partidas p JOIN usuarios u ON p.usuario_id = u.id GROUP BY u.id, u.nombre ORDER BY total_puntos DESC LIMIT 10"
     );
 
-    res.status(200).json({ result });
+    return res.status(200).json({ result });
   } catch (error) {
-    console.error("Error en la query:", error);
+    console.error("Error en la query:", error.message);
     return res.status(500).json({ message: error.message });
   }
 };
