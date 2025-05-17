@@ -13,8 +13,20 @@ import authRoute from './routes/auth.routes.js'
 const server = express() // Inicializamos el servidor
 const port = 5000 // Puerto
 
+const corsOptions = {
+  origin: (origin, callback) => {
+    // ✅ Permitir cualquier origen o solicitudes sin origen (como Postman)
+    if (!origin || origin.includes('https')) {
+      callback(null, true);
+    } else {
+      callback(new Error('Origen no permitido por CORS'));
+    }
+  },
+  credentials: true, // Permitir cookies y credenciales
+};
+
 /* Hacemos que sea json la respuesta y que pueda acceder el frontend al backend */
-server.use(cors({ origin: 'http://localhost:5173', credentials: true }));
+server.use(cors(corsOptions));
 server.use(express.json())
 server.use(cookieParser());
 
