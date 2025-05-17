@@ -11,7 +11,7 @@ import partidaRoute from './routes/partida.routes.js'
 import authRoute from './routes/auth.routes.js'
 
 const server = express() // Inicializamos el servidor
-const port = 5000 // Puerto
+const port = 5200 // Puerto
 
 const corsOptions = {
   origin: (origin, callback) => {
